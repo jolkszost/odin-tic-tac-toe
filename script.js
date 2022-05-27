@@ -29,7 +29,7 @@ console.log(gameBoardArr)
 
 })();
 gameBoardModule.generateBoard();
- console.log(gameBoardModule.gameBoardArr);
+//  console.log(gameBoardModule.gameBoardArr);
 
 
 const displayController = (function() {
@@ -37,7 +37,7 @@ const displayController = (function() {
     function clickCounter() {
        
         clickCount++
-        console.log(clickCount);
+        // console.log(clickCount);
     };
 
 
@@ -48,14 +48,16 @@ const displayController = (function() {
     //  clickCount++
     if (clickedSq.classList.contains('empty') === true) {
       if (clickCount === 0) {
-     console.log(clickedSq);
+    //  console.log(clickedSq);
      document.getElementById(pickedSq).classList.remove('empty');
      clickedSq.classList.add('clickX');
+     gameEndCheck();
 
      } else  {
          document.getElementById(pickedSq).classList.remove('empty')
          document.getElementById(pickedSq).classList.add('clickO');
          clickCount = clickCount - 2;
+         gameEndCheck();
     }   
 } else {
     clickCount--
@@ -68,10 +70,29 @@ const displayController = (function() {
     }
  
 })();
-
+let board = gameBoardModule.gameBoardArr;
+// console.log(board);
+function gameEndCheck() {
+    sqCount = 0;
+    board.forEach(element => {
+        // console.log(element)
+       if (element.classList.contains('empty') === true) {
+            
+            sqCount--;
+            console.log(sqCount);
+       } else if (element.classList.contains('empty') !== true) {
+           sqCount++;
+           console.log(sqCount);
+       }
+        
+    });
+    if (sqCount === 9) {
+        alert('game over')
+    }
+}
 
 const playerFactory = (pName) => {
-    
+
     return {
         pName: pName
     }
