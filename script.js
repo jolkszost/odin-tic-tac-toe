@@ -40,13 +40,14 @@ const displayController = (function() {
         console.log(clickCount);
     };
 
+
     
     function pickSq(pickedSq) {
      let clickedSq =  document.getElementById(pickedSq);
     //  let clickCount = 0;
     //  clickCount++
     if (clickedSq.classList.contains('empty') === true) {
-      if (clickCount === 0 || (clickCount % 2) === 0) {
+      if (clickCount === 0) {
      console.log(clickedSq);
      document.getElementById(pickedSq).classList.remove('empty');
      clickedSq.classList.add('clickX');
@@ -54,7 +55,10 @@ const displayController = (function() {
      } else  {
          document.getElementById(pickedSq).classList.remove('empty')
          document.getElementById(pickedSq).classList.add('clickO');
+         clickCount = clickCount - 2;
     }   
+} else {
+    clickCount--
 }
     }
     return {
@@ -66,6 +70,13 @@ const displayController = (function() {
 })();
 
 
-const playerFactory = function(name, xOrO) {
-    // let xOrO = 
-}
+const playerFactory = (pName) => {
+    
+    return {
+        pName: pName
+    }
+
+    
+};
+const pX = playerFactory('X');
+const pO = playerFactory('O');
