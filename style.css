@@ -1,0 +1,29 @@
+* {
+    outline: 1px solid red;
+
+}
+
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 55px);
+    grid-template-rows: repeat(3 55px);
+    height: 170px;
+    width: 170px;
+}
+
+.square {
+    border: 2.5px solid black;
+    background-color: aliceblue;
+}
+
+.empty {
+    background-color: aquamarine;
+}
+
+.clickX {
+    background-color: blue;
+}
+
+.clickO {
+    background-color: red;
+}
