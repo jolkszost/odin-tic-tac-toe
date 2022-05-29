@@ -105,6 +105,10 @@ function checkPlayerWin() {
       let winMessage = document.getElementById('playerMessage');
       winMessage.textContent = '';
       winMessage.textContent = `O Wins! congratulations ${playerOName}!`;
+
+      for(let n = 0; n < 9; n++) {
+          document.getElementById(`${n}`).removeAttribute('click');
+      }
       
       
   };
@@ -115,6 +119,9 @@ function checkPlayerWin() {
     let winMessage = document.getElementById('playerMessage');
     winMessage.textContent = '';
     winMessage.textContent = `X Wins! congratulations ${playerXName}!`;
+    for(let n = 0; n < 9; n++) {
+        document.getElementById(`${n}`).removeAttribute('onclick');
+    }
       
   };
 
