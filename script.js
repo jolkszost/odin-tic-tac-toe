@@ -28,6 +28,7 @@ console.log(gameBoardArr)
         gameBoardArr: gameBoardArr
     };
 
+
 })();
 gameBoardModule.generateBoard();
 //  console.log(gameBoardModule.gameBoardArr);
@@ -59,13 +60,16 @@ function gameEndCheck() {
         
     });
     if (sqCount === 9) {
-        alert('game over')
+        let drawMessage = document.getElementById('playerMessage');
+       
+        drawMessage.textContent = 'Tie Game!'
+        
     }
 }
 
 function checkPlayerWin() {
-   const arrayXs = board.filter(checkIfX);
-  const  arrayOs = board.filter(checkIfO);
+    const arrayXs = board.filter(checkIfX);
+    const  arrayOs = board.filter(checkIfO);
 
     function checkIfX(value) {
        return value.classList.contains('X'); 
@@ -98,13 +102,20 @@ function checkPlayerWin() {
  if ((oHas0 && oHas1 && oHas2) || (oHas0 && oHas3 && oHas6) || (oHas0 && oHas4 && oHas8) || (oHas1 && oHas4 && oHas7)
   || (oHas2 && oHas5 && oHas8) || (oHas2 && oHas4 && oHas6) || (oHas3 && oHas4 && oHas5) || (oHas6 && oHas7 && oHas8))
   {
-      alert('O Wins!')
+      let winMessage = document.getElementById('playerMessage');
+      winMessage.textContent = '';
+      winMessage.textContent = `O Wins! congratulations ${playerOName}!`;
+      
+      
   };
 
   if ((xHas0 && xHas1 && xHas2) || (xHas0 && xHas3 && xHas6) || (xHas0 && xHas4 && xHas8) || (xHas1 && xHas4 && xHas7)
   || (xHas2 && xHas5 && xHas8) || (xHas2 && xHas4 && xHas6) || (xHas3 && xHas4 && xHas5) || (xHas6 && xHas7 && xHas8))
   {
-      alert('X Wins!')
+    let winMessage = document.getElementById('playerMessage');
+    winMessage.textContent = '';
+    winMessage.textContent = `X Wins! congratulations ${playerXName}!`;
+      
   };
 
 };    
@@ -152,5 +163,29 @@ const playerFactory = (pName) => {
 
     
 };
+const fillOName = function() {
+
+   let oName = document.getElementById('playerOName');
+   let oNameInput = document.getElementById('playerO');
+   if (oName.textContent === 'Player O') {
+   oName.textContent = `Player O Is: ${oNameInput.value}!`;
+   } else {
+       let oSubmit = document.getElementById('playerOSubmit');
+       oSubmit.removeEventListener('click');
+   }
+}
+
+const fillXName = function() {
+    let xName = document.getElementById('playerXName');
+    let xNameInput = document.getElementById('playerX');
+    if (xName.textContent === 'Player X') {
+    xName.textContent = `Player X Is: ${xNameInput.value}!`;
+    } else {
+        let xSubmit = document.getElementById('playerXSubmit');
+        xSubmit.removeEventListener('click');
+    }
+}
+document.getElementById('playerXSubmit').addEventListener('click', fillXName);
+document.getElementById('playerOSubmit').addEventListener('click', fillOName);
 const pX = playerFactory('X');
 const pO = playerFactory('O');

@@ -13,6 +13,36 @@
        <div id="gameBoard">
 
        </div>
+       <div id="userContainer">
+           <div id="playerContainer">
+
+                <div id="messageRestartContainer">
+                    <p id="playerMessage">Pick Names to Start!</p>
+                    <button type="button" id="restart" onClick="window.location.reload();">New Game!</button>
+                </div>
+
+                <div id="playerNameScoreContainer">
+                    <p id="playerXName" class="playerName">Player X</p>
+                    <p id="playerOName" class="playerName">Player O</p>
+                </div>
+            </div>
+
+            <form action="">
+                <div id="formX">       
+                    <label for="playerX" id="labelX">Player X Name?</label>
+                    <input type="text" name="playerX" id="playerX" required>
+                    <span class="error"></span>
+                    <button type="button" id="playerXSubmit" class="playerButton">Submit Player X Name</button>
+                </div> 
+                <div id="formO">
+                    <label for="playerO" id="labelO">Player O Name?</label>
+                    <input type="text" name="playerO" id="playerO" required>
+                    <span class="error"></span>
+                    <button type="button" id="playerOSubmit" class="playerButton">Submit Player O Name</button>  
+                </div>
+            </form>              
+           
+       </div>
    </div> 
 </body>
 </html>
