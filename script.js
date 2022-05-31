@@ -9,6 +9,7 @@ const gameBoardModule = (function() {
     
     let gameBoard = document.getElementById('gameBoard');
     function generateBoard() {
+        
         for (let i = 0; i < 9; i++) {
            let sq = document.createElement('div');
             gameBoard.appendChild(sq);
@@ -30,8 +31,12 @@ console.log(gameBoardArr)
 
 
 })();
+
 gameBoardModule.generateBoard();
+
 //  console.log(gameBoardModule.gameBoardArr);
+
+
 
 
 const displayController = (function() {
@@ -104,10 +109,10 @@ function checkPlayerWin() {
   {
       let winMessage = document.getElementById('playerMessage');
       winMessage.textContent = '';
-      winMessage.textContent = `O Wins! congratulations ${playerOName}!`;
+      winMessage.textContent = `O Wins! Congratulations ${document.getElementById('playerOName').textContent.slice(13)}!`;
 
       for(let n = 0; n < 9; n++) {
-          document.getElementById(`${n}`).removeAttribute('click');
+          document.getElementById(`${n}`).removeAttribute('onclick');
       }
       
       
@@ -118,7 +123,7 @@ function checkPlayerWin() {
   {
     let winMessage = document.getElementById('playerMessage');
     winMessage.textContent = '';
-    winMessage.textContent = `X Wins! congratulations ${playerXName}!`;
+    winMessage.textContent = `X Wins! Congratulations ${document.getElementById('playerXName').textContent.slice(13)}!`;
     for(let n = 0; n < 9; n++) {
         document.getElementById(`${n}`).removeAttribute('onclick');
     }
@@ -162,10 +167,12 @@ function checkPlayerWin() {
  
 })();
 
-const playerFactory = (pName) => {
+const playerModule = (function() {
+const playerFactory = (pName, xOrO) => {
 
     return {
-        pName: pName
+        pName: pName,
+        xOrO: xOrO
     }
 
     
@@ -178,7 +185,8 @@ const fillOName = function() {
    oName.textContent = `Player O Is: ${oNameInput.value}!`;
    } else {
        let oSubmit = document.getElementById('playerOSubmit');
-       oSubmit.removeEventListener('click');
+       oSubmit.removeEventListener('click', fillOName);
+       oSubmit.removeEventListener('click', startGameMessage);
    }
 }
 
@@ -189,10 +197,20 @@ const fillXName = function() {
     xName.textContent = `Player X Is: ${xNameInput.value}!`;
     } else {
         let xSubmit = document.getElementById('playerXSubmit');
-        xSubmit.removeEventListener('click');
+        xSubmit.removeEventListener('click', fillXName);
+        xSubmit.removeEventListener('click', startGameMessage);
     }
 }
+
+const startGameMessage = function() {
+    if (document.getElementById('playerOName').textContent !== 'Player O' && document.getElementById('playerXName').textContent !== 'Player X') {
+        document.getElementById('playerMessage').textContent = 'Play Away!';
+    }
+};
+
 document.getElementById('playerXSubmit').addEventListener('click', fillXName);
 document.getElementById('playerOSubmit').addEventListener('click', fillOName);
-const pX = playerFactory('X');
-const pO = playerFactory('O');
+document.getElementById('playerXSubmit').addEventListener('click', startGameMessage);
+document.getElementById('playerOSubmit').addEventListener('click', startGameMessage);
+
+})();
